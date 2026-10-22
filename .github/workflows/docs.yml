@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to push to the gh-pages branch
 
     steps:
       - uses: actions/checkout@v7
@@ -27,4 +29,4 @@ jobs:
           target_branch: gh-pages
           build_dir: out
         env:
-          GH_PAT: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
