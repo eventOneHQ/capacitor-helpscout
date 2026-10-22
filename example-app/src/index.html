@@ -2,24 +2,69 @@
 <html lang="en" dir="ltr" class="hydrated">
   <head>
     <meta charset="UTF-8" />
-    <title>Example Capacitor App</title>
+    <title>Help Scout Beacon Example</title>
     <meta
       name="viewport"
       content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta name="format-detection" content="telephone=no" />
+    <style>
+      body { font-family: -apple-system, system-ui, sans-serif; margin: 0; padding: 16px; padding-top: env(safe-area-inset-top); }
+      h1 { font-size: 1.25rem; }
+      h2 { font-size: 1rem; margin: 20px 0 8px; }
+      input { width: 100%; box-sizing: border-box; margin-bottom: 8px; padding: 8px; font-size: 1rem; }
+      button { margin: 0 6px 6px 0; padding: 8px 12px; font-size: 0.9rem; }
+      pre { background: #f3f3f3; padding: 8px; overflow: auto; max-height: 180px; font-size: 0.75rem; }
+    </style>
   </head>
   <body>
-    <main>
-      <h1>Capacitor Test Plugin Project</h1>
-      <p>
-        This project can be used to test out the functionality of your plugin. Nothing in the
-        <em>example-app/</em> folder will be published to npm when using this template, so you can create away!
-      </p>
-      <label for="echoInput">Echo Text:</label>
-      <input type="text" id="echoInput" name="echoInput" value="Hello World!" />
-      <button onclick="testEcho()">Click Me!</button>
-    </main>
+    <h1>Help Scout Beacon</h1>
+
+    <h2>Setup</h2>
+    <input id="beaconId" placeholder="Beacon ID" />
+    <button data-action="initialize">Initialize</button>
+    <button data-action="configure">Configure</button>
+    <button data-action="getStatus">Status</button>
+
+    <h2>Open</h2>
+    <button data-action="open">Open</button>
+    <button data-action="close">Close (in 3s)</button>
+    <button data-action="navigate:ask">Ask</button>
+    <button data-action="navigate:askMessage">Message</button>
+    <button data-action="navigate:askChat">Chat</button>
+    <button data-action="navigate:answers">Answers</button>
+    <button data-action="navigate:aiAnswers">AI Answers</button>
+    <button data-action="navigate:previousMessages">Previous</button>
+    <input id="query" placeholder="Search / article ID / question" />
+    <button data-action="search">Search</button>
+    <button data-action="openArticle">Open article</button>
+    <button data-action="askQuestion">Ask question</button>
+
+    <h2>User</h2>
+    <input id="email" placeholder="Email" />
+    <input id="name" placeholder="Name" />
+    <input id="signature" placeholder="Secure Mode signature (optional)" />
+    <button data-action="identify">Identify</button>
+    <button data-action="logout">Logout</button>
+    <button data-action="reset">Reset form</button>
+    <button data-action="clear">Clear all</button>
+    <button data-action="addAttribute">Add attribute</button>
+    <button data-action="removeAttribute">Remove attribute</button>
+    <button data-action="clearAttributes">Clear attributes</button>
+
+    <h2>Contact form &amp; suggestions</h2>
+    <button data-action="setSessionAttributes">Session attributes</button>
+    <button data-action="getSessionAttributes">Get session attributes</button>
+    <button data-action="setPrefilledForm">Prefill form</button>
+    <button data-action="clearPrefilledForm">Clear prefill</button>
+    <button data-action="setSuggestions">Set suggestions</button>
+    <button data-action="resetSuggestions">Reset suggestions</button>
+
+    <h2>Push</h2>
+    <button data-action="initializePushNotifications">Init push</button>
+
+    <h2>Log</h2>
+    <pre id="log"></pre>
 
     <script src="./js/example.js" type="module"></script>
   </body>

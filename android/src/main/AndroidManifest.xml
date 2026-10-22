@@ -1,2 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!-- Beacon is initialized from JavaScript with HelpScout.initialize(), so the automatic init is disabled. -->
+        <meta-data
+            android:name="com.helpscout.beacon.SDKAutoInitialise"
+            android:value="false" />
+    </application>
 </manifest>

@@ -15,19 +15,22 @@
     "Package.swift",
     "CapacitorHelpscout.podspec"
   ],
-  "author": "eventOne <nprail@event1.io>",
+  "author": "eventOne Labs <opensource@event1.io>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/event1/capacitor-helpscout.git"
+    "url": "https://github.com/eventOneHQ/capacitor-helpscout"
   },
   "bugs": {
-    "url": "https://github.com/event1/capacitor-helpscout/issues"
+    "url": "https://github.com/eventOneHQ/capacitor-helpscout/issues"
   },
   "keywords": [
     "capacitor",
     "plugin",
-    "native"
+    "native",
+    "helpscout",
+    "help-scout",
+    "beacon"
   ],
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
@@ -39,16 +42,15 @@
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
     "swiftlint": "node-swiftlint",
-    "docgen": "docgen --api HelpScoutPlugin --output-readme README.md --output-json dist/docs.json",
-    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
+    "build": "npm run clean && tsc && rollup -c rollup.config.mjs",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "docs": "typedoc --excludeExternals --out out src/index.ts"
   },
   "devDependencies": {
     "@capacitor/android": "^8.0.0",
     "@capacitor/core": "^8.0.0",
-    "@capacitor/docgen": "^0.3.1",
     "@capacitor/ios": "^8.0.0",
     "@ionic/eslint-config": "^0.4.0",
     "@ionic/prettier-config": "^4.0.0",
@@ -58,7 +60,9 @@
     "prettier-plugin-java": "^2.7.7",
     "rimraf": "^6.1.0",
     "rollup": "^4.53.2",
+    "semantic-release": "^25.0.9",
     "swiftlint": "^2.0.0",
+    "typedoc": "^0.28.20",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
@@ -76,5 +80,20 @@
     "android": {
       "src": "android"
     }
+  },
+  "release": {
+    "branches": [
+      {
+        "name": "next"
+      },
+      {
+        "name": "beta",
+        "channel": "beta",
+        "prerelease": true
+      }
+    ]
+  },
+  "allowScripts": {
+    "swiftlint@2.0.0": true
   }
 }

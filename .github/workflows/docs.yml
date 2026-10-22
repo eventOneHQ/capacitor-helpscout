@@ -1,0 +1,30 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - next
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26
+      - name: Typedoc
+        run: |
+          npm ci
+          npm run docs
+        env:
+          CI: true
+      - name: Deploy
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v5
+        with:
+          target_branch: gh-pages
+          build_dir: out
+        env:
+          GH_PAT: ${{ secrets.GH_TOKEN }}

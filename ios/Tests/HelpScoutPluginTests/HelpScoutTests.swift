@@ -2,14 +2,27 @@ import XCTest
 @testable import HelpScoutPlugin
 
 class HelpScoutTests: XCTestCase {
-    func testEcho() {
-        // This is an example of a functional test case for a plugin.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testHexDataParsing() {
+        XCTAssertEqual(Data(hexString: "0a0B ff"), Data([0x0A, 0x0B, 0xFF]))
+        XCTAssertNil(Data(hexString: "abc"))
+        XCTAssertNil(Data(hexString: "zz"))
+    }
 
+    func testColorParsing() {
+        XCTAssertNotNil(UIColor(hexString: "#617DEC"))
+        XCTAssertNotNil(UIColor(hexString: "fff"))
+        XCTAssertNil(UIColor(hexString: "not-a-color"))
+    }
+
+    func testSessionAttributeLimit() {
         let implementation = HelpScout()
-        let value = "Hello, World!"
-        let result = implementation.echo(value)
+        let tooMany = Dictionary(uniqueKeysWithValues: (0..<21).map { ("key\($0)", "value") })
+        XCTAssertFalse(implementation.setSessionAttributes(tooMany))
+        XCTAssertTrue(implementation.setSessionAttributes(["plan": "pro"]))
+        XCTAssertEqual(implementation.getSessionAttributes(), ["plan": "pro"])
+    }
 
-        XCTAssertEqual(value, result)
+    func testRequiresInitialization() {
+        XCTAssertThrowsError(try HelpScout().open(signature: nil, from: nil))
     }
 }
