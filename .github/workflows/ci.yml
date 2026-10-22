@@ -1,10 +1,11 @@
 name: CI
 on:
-  pull_request:
   push:
-    branches:
-      - next
-      - beta
+  pull_request:
+concurrency:
+  # A branch with an open PR triggers both events, so share one group and cancel the older run.
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 jobs:
   web:
     name: Web
